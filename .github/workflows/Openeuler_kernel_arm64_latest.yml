@@ -40,10 +40,15 @@ jobs:
         sudo apt update && apt install dwarves -y
         sudo chown $USER:$GROUPS /workdir
         sudo chown $USER:$GROUPS /workdir/upload
+        
+    - name: Check for updates
+      id: check
+      run: |
+        kernel_ver=$(curl -s https://www.kernel.org/ | grep ' <a href="https://cdn.kernel.org/pub/linux/kernel/' | head -n 1 | awk -F '[>]' '{print $2}' | awk -F '[<]' '{print $1}')
+ 
     - name: Get source code
       id: code
       working-directory: /workdir
-      if: steps.check.outputs.status == 'success'
       run: |
         df -hT $PWD
         kernel_file=$(curl -s https://www.kernel.org/ | grep 'alt="Download"' | awk -F '"' '{print $2}')
