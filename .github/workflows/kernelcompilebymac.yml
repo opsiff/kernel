@@ -41,6 +41,7 @@ jobs:
         mkdir workdir/upload
         chown $USER:$GROUPS ./workdir
         chown $USER:$GROUPS ./workdir/upload
+        brew install dpkg
         brew install spinlocklabs/mac-linux-kdk/mac-linux-kdk
   
     - name: SSH connection to Actions
