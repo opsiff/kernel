@@ -36,7 +36,7 @@ jobs:
       env:
         DEBIAN_FRONTEND: noninteractive
       run: |
-        cat /proc/cpuinfo
+        sysctl -a | grep machdep.cpu
         brew install spinlocklabs/mac-linux-kdk/mac-linux-kdk
         
     - name: Get source code
