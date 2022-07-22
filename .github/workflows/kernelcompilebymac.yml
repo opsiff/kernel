@@ -38,6 +38,7 @@ jobs:
       run: |
         sysctl -a | grep machdep.cpu
         mkdir workdir
+        mkdir workdir/upload
         chown $USER:$GROUPS ./workdir
         chown $USER:$GROUPS ./workdir/upload
         brew install spinlocklabs/mac-linux-kdk/mac-linux-kdk
