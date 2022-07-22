@@ -58,7 +58,7 @@ jobs:
         kernel_file=$(curl -s https://www.kernel.org/ | grep tarball | grep 5.10 | awk -F '"' '{print $2}')
         kernel_ver=$(curl -s https://www.kernel.org/ | grep tarball | grep 5.10 | awk -F '"' '{print $2}' | awk -F 'linux-' '{print $2}' | awk -F '.tar.xz' '{print $1}')
         wget -O kernel.tar.xz $kernel_file
-        tar -Jxvf kernel.tar.xz -C ./workdir && cd ./workdir/linux-$kernel_ver
+        tar -Jxvf kernel.tar.xz . && cd ./linux-$kernel_ver
         wget -O openeuler_defconfig https://raw.githubusercontent.com/opsiff/kernel/master/arm64openeuler_defconfig
         cp openeuler_defconfig ./arch/arm64/configs/openeuler_defconfig
         lkmake ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- openeuler_defconfig
