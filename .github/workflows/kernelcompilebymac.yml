@@ -65,9 +65,9 @@ jobs:
         tar -Jxvf kernel.tar.xz && cd ./linux-$kernel_ver
         wget -O openeuler_defconfig https://raw.githubusercontent.com/opsiff/kernel/master/arm64openeuler_defconfig
         cp openeuler_defconfig ./arch/arm64/configs/openeuler_defconfig
-        lkmake ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- openeuler_defconfig CONFIGURE_OPTS="--with-openssl=$(brew --prefix openssl)"
+        make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- openeuler_defconfig CONFIGURE_OPTS="--with-openssl=$(brew --prefix openssl)"
         echo -e "$(nproc) thread compile"
-        sudo time lkmake ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- -j$(($(nproc) + 1)) bindeb-pkg CONFIGURE_OPTS="--with-openssl=$(brew --prefix openssl)"
+        sudo time make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- -j$(($(nproc) + 1)) bindeb-pkg CONFIGURE_OPTS="--with-openssl=$(brew --prefix openssl)"
         cd .. && mv *.deb ./upload
         echo "::set-output name=status::success"
         echo "FILE_DATE=Kernel_Openeuler_$kernel_ver_$(date +"%Y%m%d%H%M")" >> $GITHUB_ENV   
